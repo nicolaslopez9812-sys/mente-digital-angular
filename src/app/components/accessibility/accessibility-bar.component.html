@@ -1,0 +1,36 @@
+<div class="a11y-wrapper" role="toolbar" aria-label="Accesibilidad">
+  <button class="a11y-tool-btn"
+          (click)="toggleTheme()"
+          [attr.aria-label]="isDark ? 'Activar modo claro' : 'Activar modo oscuro'"
+          [title]="isDark ? 'Modo claro' : 'Modo oscuro'">
+    {{ isDark ? '☀' : '☾' }}
+  </button>
+
+  <button class="a11y-tool-btn"
+          (click)="a11y.decreaseFont()"
+          [disabled]="fontSize <= a11y.MIN_SIZE"
+          aria-label="Reducir texto"
+          title="Reducir texto">
+    A-
+  </button>
+
+  <div class="a11y-font-status" aria-live="polite" [title]="'Tamaño de texto: ' + fontSize + '%'">
+    {{ fontSize }}%
+  </div>
+
+  <button class="a11y-tool-btn"
+          (click)="a11y.increaseFont()"
+          [disabled]="fontSize >= a11y.MAX_SIZE"
+          aria-label="Aumentar texto"
+          title="Aumentar texto">
+    A+
+  </button>
+
+  <button class="a11y-reset-btn"
+          (click)="a11y.resetFont()"
+          [disabled]="fontSize === 100"
+          aria-label="Restablecer tamaño de texto"
+          title="Restablecer tamaño">
+    100
+  </button>
+</div>

@@ -1,0 +1,211 @@
+<app-accessibility-bar></app-accessibility-bar>
+<!-- Botón volver arriba -->
+<button class="back-to-top" id="backToTop" aria-label="Volver al inicio">↑</button>
+<div id="top"></div>
+
+<app-navbar></app-navbar>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-badge"><span class="badge-dot"></span> Plataforma #1 en educación digital en Colombia</div>
+    <h1 class="hero-title">Aprende las habilidades<br />que <em>transforman</em><br />tu futuro</h1>
+    <p class="hero-subtitle">Más de 200 cursos en tecnología, diseño y negocios. Aprende con expertos, a tu ritmo, y obtén certificados reconocidos por las mejores empresas.</p>
+    <div class="hero-actions">
+      <a routerLink="/register" class="btn btn-primary btn-lg">Comenzar gratis</a>
+      <a (click)="scrollToSection('cursos')" style="cursor:pointer" class="btn btn-outline btn-lg">▶ Ver cursos</a>
+    </div>
+    <div class="hero-trust">
+      <div class="trust-avatars">
+        <img src="https://i.pravatar.cc/32?img=1" alt="Est." />
+        <img src="https://i.pravatar.cc/32?img=2" alt="Est." />
+        <img src="https://i.pravatar.cc/32?img=3" alt="Est." />
+      </div>
+      <span>Únete a <strong>50.000+</strong> estudiantes activos</span>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="floating-card card-progress">
+      <div class="card-icon" style="background:#E1F5EE">💻</div>
+      <div class="card-info">
+        <span class="card-title">React & Node.js</span>
+        <div class="progress-bar"><div class="progress-fill" style="width:68%"></div></div>
+        <span class="card-sub">68% completado</span>
+      </div>
+    </div>
+    <div class="hero-main-card">
+      <div class="main-card-header"><span class="mc-tag">En vivo ahora</span><span class="mc-live-dot"></span></div>
+      <div class="mc-course-art">🎓</div>
+      <h3 class="mc-title">Fundamentos de Programación</h3>
+      <p class="mc-sub">con Carlos Vélez · 342 estudiantes</p>
+      <a routerLink="/register" class="btn btn-primary" style="width:100%;margin-top:1rem;display:flex;justify-content:center">Unirse a la clase</a>
+    </div>
+    <div class="floating-card card-cert">
+      <div class="cert-icon">🏆</div>
+      <div><span class="card-title">¡Certificado obtenido!</span><span class="card-sub">UX Design Professional</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- LOGOS -->
+<div class="logos-band">
+  <p class="logos-label">Nuestros egresados trabajan en</p>
+  <div class="logos-row">
+    <span class="brand-logo">Google</span><span class="brand-logo">Rappi</span>
+    <span class="brand-logo">Bancolombia</span><span class="brand-logo">Globant</span>
+    <span class="brand-logo">Mercado Libre</span><span class="brand-logo">Platzi</span>
+  </div>
+</div>
+
+<!-- NOSOTROS -->
+<section class="nosotros-section" id="nosotros">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">Quiénes somos</span>
+      <h2 class="section-title">Nacimos para transformar la educación digital</h2>
+      <p class="section-sub">Somos una startup colombiana comprometida con democratizar el acceso al conocimiento tecnológico en toda Latinoamérica.</p>
+    </div>
+    <div class="nosotros-grid">
+      <div class="nosotros-card"><div class="nos-icon">🚀</div><h3>Nuestra historia</h3><p>Fundada en 2022 en Bogotá por ingenieros y educadores apasionados, <strong>Mente Digital AAA</strong> nació con una idea: que cualquier persona pueda acceder a educación digital de primer nivel. Hoy tenemos estudiantes en más de 15 países.</p></div>
+      <div class="nosotros-card"><div class="nos-icon">🎯</div><h3>Nuestra misión</h3><p>Brindar formación tecnológica de alta calidad, práctica y accesible, que conecte a los estudiantes con las habilidades reales que el mercado exige. Cada curso está diseñado con instructores activos de la industria.</p></div>
+      <div class="nosotros-card"><div class="nos-icon">🌎</div><h3>Nuestra visión</h3><p>Ser la plataforma de educación digital líder de Latinoamérica para 2027, formando a más de 500.000 profesionales del futuro y siendo el puente entre el talento local y las oportunidades globales.</p></div>
+    </div>
+    <div class="nosotros-oferta">
+      <div class="section-header" style="margin-bottom:2rem"><span class="section-tag">Lo que ofrecemos</span><h2 class="section-title">Todo lo que necesitas para crecer</h2></div>
+      <div class="oferta-grid">
+        <div class="oferta-item"><div class="oferta-icon" style="background:#E6F1FB">💻</div><h4>Cursos 100% online</h4><p>Más de 200 cursos en video HD, accesibles desde cualquier dispositivo en cualquier momento.</p></div>
+        <div class="oferta-item"><div class="oferta-icon" style="background:#E1F5EE">🎙️</div><h4>Clases en vivo</h4><p>Sesiones semanales en directo con instructores expertos para resolver dudas en tiempo real.</p></div>
+        <div class="oferta-item"><div class="oferta-icon" style="background:#FAECE7">🛠️</div><h4>Proyectos reales</h4><p>Cada curso incluye proyectos basados en casos reales para construir tu portafolio profesional.</p></div>
+        <div class="oferta-item"><div class="oferta-icon" style="background:#EEEDFE">🏆</div><h4>Certificados verificables</h4><p>Certificados con código QR reconocidos por más de 300 empresas del sector tecnológico.</p></div>
+        <div class="oferta-item"><div class="oferta-icon" style="background:#E1F5EE">👥</div><h4>Comunidad activa</h4><p>Únete a 50.000+ estudiantes. Comparte proyectos, resuelve dudas y haz networking.</p></div>
+        <div class="oferta-item"><div class="oferta-icon" style="background:#E6F1FB">🤝</div><h4>Mentoría personalizada</h4><p>Sesiones 1 a 1 con mentores de Google, Rappi y Globant que guían tu carrera.</p></div>
+      </div>
+    </div>
+    <div class="stats-grid" style="margin-top:3rem;background:var(--green-50);border-radius:20px;padding:2.5rem">
+      <div class="stat-item"><span class="stat-number" data-target="50000">0</span><span class="stat-label">Estudiantes activos</span></div>
+      <div class="stat-item"><span class="stat-number" data-target="200">0</span><span class="stat-label">Cursos disponibles</span></div>
+      <div class="stat-item"><span class="stat-number" data-target="98">0</span><span class="stat-label">% de satisfacción</span></div>
+      <div class="stat-item"><span class="stat-number" data-target="85">0</span><span class="stat-label">% mejora laboral</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- CURSOS (Angular Component) -->
+<app-cursos></app-cursos>
+
+<!-- CÓMO FUNCIONA -->
+<section class="how-section">
+  <div class="container">
+    <div class="section-header"><span class="section-tag">Proceso</span><h2 class="section-title">¿Cómo funciona Mente Digital AAA?</h2></div>
+    <div class="steps-grid">
+      <div class="step-item"><div class="step-number">01</div><div class="step-icon">🔍</div><h3>Elige tu curso</h3><p>Explora nuestro catálogo y encuentra el curso que impulse tu carrera.</p></div>
+      <div class="step-item"><div class="step-number">02</div><div class="step-icon">📚</div><h3>Aprende a tu ritmo</h3><p>Accede a videos, lecturas y proyectos prácticos desde cualquier dispositivo.</p></div>
+      <div class="step-item"><div class="step-number">03</div><div class="step-icon">🤝</div><h3>Practica en comunidad</h3><p>Conecta con estudiantes y mentores, resuelve dudas en tiempo real.</p></div>
+      <div class="step-item"><div class="step-number">04</div><div class="step-icon">🏆</div><h3>Obtén tu certificado</h3><p>Recibe un certificado digital verificable que puedes compartir en LinkedIn.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIOS -->
+<section class="section testimonios-section" id="testimonios">
+  <div class="container">
+    <div class="section-header"><span class="section-tag">Testimonios</span><h2 class="section-title">Lo que dicen nuestros estudiantes</h2></div>
+    <div class="testimonios-grid">
+      <div class="testimonio-card featured"><div class="stars">★★★★★</div><p>"Mente Digital AAA me ayudó a entender programación que en la universidad se sentía muy compleja. Los proyectos prácticos hacen toda la diferencia."</p><div class="testimonio-author"><div class="test-emoji-avatar">👨‍💻</div><div><strong>Juan Acevedo</strong><span>Est. Ing. Sistemas · Bogotá</span></div></div></div>
+      <div class="testimonio-card"><div class="stars">★★★★★</div><p>"Los cursos complementan perfectamente la carrera. Aprendí React y ya lo aplico en mi proyecto de grado. Muy recomendado."</p><div class="testimonio-author"><div class="test-emoji-avatar">🧑‍🎓</div><div><strong>Stiven Arévalo</strong><span>Est. Ing. Sistemas · Bogotá</span></div></div></div>
+      <div class="testimonio-card"><div class="stars">★★★★★</div><p>"La plataforma es muy intuitiva. En pocas semanas ya tenía mi primer portafolio listo para mostrar a empresas."</p><div class="testimonio-author"><div class="test-emoji-avatar">👨‍💼</div><div><strong>Jaider Avendaño</strong><span>Est. Ing. Sistemas · Bogotá</span></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRECIOS -->
+<section class="section precios-section" id="precios">
+  <div class="container">
+    <div class="section-header"><span class="section-tag">Planes</span><h2 class="section-title">Elige tu plan</h2><p class="section-sub">Sin contratos. Cancela cuando quieras.</p></div>
+    <div class="precios-grid">
+      <div class="precio-card"><h3>Gratuito</h3><div class="precio-amount"><span class="price-currency">$</span>0<span class="price-period">/mes</span></div><ul class="precio-features"><li>✓ 5 cursos gratuitos</li><li>✓ Acceso a comunidad</li><li>✓ Proyectos básicos</li><li class="disabled">✗ Certificados</li><li class="disabled">✗ Mentorías</li></ul><a routerLink="/register" class="btn btn-outline" style="width:100%">Comenzar gratis</a></div>
+      <div class="precio-card featured"><div class="plan-badge">Más popular</div><h3>Pro</h3><div class="precio-amount"><span class="price-currency">$</span>59.000<span class="price-period">/mes</span></div><ul class="precio-features"><li>✓ Cursos ilimitados</li><li>✓ Certificados digitales</li><li>✓ Proyectos avanzados</li><li>✓ 2 mentorías/mes</li><li class="disabled">✗ Acceso empresarial</li></ul><a routerLink="/register" class="btn btn-primary" style="width:100%">Empezar Pro</a></div>
+      <div class="precio-card"><h3>Empresas</h3><div class="precio-amount"><span class="price-currency">$</span>199.000<span class="price-period">/mes</span></div><ul class="precio-features"><li>✓ Todo de Pro</li><li>✓ Hasta 20 usuarios</li><li>✓ Dashboard de equipo</li><li>✓ Mentorías ilimitadas</li><li>✓ Soporte prioritario</li></ul><a routerLink="/register" class="btn btn-outline" style="width:100%">Contactar ventas</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ (Angular Component) -->
+<app-faq></app-faq>
+
+<!-- CONTÁCTENOS -->
+<section class="section contacto-section" id="contacto">
+  <div class="container">
+    <div class="contacto-grid">
+      <div class="contacto-info">
+        <span class="section-tag">Contáctenos</span>
+        <h2 class="section-title" style="text-align:left">¿Tienes alguna duda?</h2>
+        <p style="color:var(--gray-600);margin-bottom:2rem;line-height:1.7">Nuestro equipo está listo para ayudarte. Te responderemos en menos de 24 horas.</p>
+        <div class="contacto-datos">
+          <div class="contacto-dato"><div class="dato-icon">📧</div><div><div class="dato-label">Correo</div><div class="dato-valor">hola&#64;mentedigitalaaa.co</div></div></div>
+          <div class="contacto-dato"><div class="dato-icon">📱</div><div><div class="dato-label">WhatsApp</div><div class="dato-valor">+57 300 123 4567</div></div></div>
+          <div class="contacto-dato"><div class="dato-icon">🕐</div><div><div class="dato-label">Horario</div><div class="dato-valor">Lun – Vie · 8:00 AM – 6:00 PM</div></div></div>
+          <div class="contacto-dato"><div class="dato-icon">📍</div><div><div class="dato-label">Ubicación</div><div class="dato-valor">Bogotá, Colombia</div></div></div>
+        </div>
+      </div>
+      <div class="contacto-form-wrap">
+        <form id="contactForm" class="contacto-form" (submit)="$event.preventDefault()">
+          <div class="form-row">
+            <div class="form-group"><label>Nombre completo</label><input type="text" placeholder="Tu nombre" /></div>
+            <div class="form-group"><label>Correo electrónico</label><input type="email" placeholder="tucorreo@ejemplo.com" /></div>
+          </div>
+          <div class="form-group"><label>Asunto</label><select><option value="">Selecciona un tema...</option><option>Información sobre cursos</option><option>Problemas con mi cuenta</option><option>Pagos y facturación</option><option>Quiero ser instructor</option><option>Otro</option></select></div>
+          <div class="form-group"><label>Mensaje</label><textarea rows="4" placeholder="Cuéntanos tu duda..."></textarea></div>
+          <button type="submit" class="btn btn-primary" style="width:100%;padding:13px;font-size:15px">Enviar mensaje</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="cta-final">
+  <div class="container">
+    <div class="cta-box">
+      <h2>¿Listo para transformar tu carrera?</h2>
+      <p>Únete a más de 50.000 estudiantes. Los primeros 7 días son completamente gratis.</p>
+      <div class="cta-actions">
+        <a routerLink="/register" class="btn btn-white btn-lg">Crear cuenta gratis</a>
+        <a routerLink="/cursos" class="btn btn-outline-white btn-lg">Explorar cursos</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a routerLink="/" class="logo">Mente Digital <span>AAA</span></a>
+        <p>La plataforma de educación digital que transforma carreras en Colombia y Latinoamérica.</p>
+        <div class="social-links"><a href="#">📸</a><a href="#">💼</a><a href="#">▶️</a><a href="#">🐦</a></div>
+      </div>
+      <div class="footer-col"><h4>Navegar</h4><ul>
+        <li><a (click)="scrollToSection('top')" style="cursor:pointer">🏠 Inicio</a></li>
+        <li><a routerLink="/cursos">📚 Cursos</a></li>
+        <li><a (click)="scrollToSection('precios')" style="cursor:pointer">💳 Precios</a></li>
+        <li><a (click)="scrollToSection('testimonios')" style="cursor:pointer">⭐ Testimonios</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Mi cuenta</h4><ul>
+        <li><a routerLink="/register">✨ Crear cuenta gratis</a></li>
+        <li><a routerLink="/login">🔑 Iniciar sesión</a></li>
+        <li><a routerLink="/dashboard">🖥️ Mi dashboard</a></li>
+      </ul></div>
+      <div class="footer-col"><h4>Ayuda</h4><ul>
+        <li><a (click)="scrollToSection('faq')" style="cursor:pointer">❓ Preguntas frecuentes</a></li>
+        <li><a (click)="scrollToSection('contacto')" style="cursor:pointer">📩 Contáctenos</a></li>
+        <li><a (click)="scrollToSection('nosotros')" style="cursor:pointer">ℹ️ Sobre Mente Digital AAA</a></li>
+      </ul></div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Mente Digital AAA S.A.S. – Uniminuto, Desarrollado por estudiantes.</p>
+      <a (click)="scrollToSection('top')" style="cursor:pointer" class="footer-back-top">↑ Volver al inicio</a>
+    </div>
+  </div>
+</footer>

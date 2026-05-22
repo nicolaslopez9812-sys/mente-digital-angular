@@ -1,0 +1,41 @@
+<nav class="navbar" [class.scrolled]="isScrolled" id="navbar">
+  <div class="nav-container">
+
+    <!-- Logo -->
+    <a class="logo" (click)="scrollTo('top')" style="cursor:pointer;white-space:nowrap">
+      Mente Digital <span>AAA</span>
+    </a>
+
+    <!-- Links -->
+    <ul class="nav-links" [class.open]="isMenuOpen">
+      <li><a (click)="scrollTo('top')"        class="nav-anchor">🏠 Inicio</a></li>
+      <li><a (click)="scrollTo('cursos')"     class="nav-anchor">Cursos</a></li>
+      <li><a (click)="scrollTo('nosotros')"   class="nav-anchor">Nosotros</a></li>
+      <li><a (click)="scrollTo('testimonios')" class="nav-anchor">Testimonios</a></li>
+      <li><a (click)="scrollTo('precios')"    class="nav-anchor">Precios</a></li>
+      <li><a (click)="scrollTo('faq')"        class="nav-anchor">FAQ</a></li>
+      <li><a (click)="scrollTo('contacto')"   class="nav-anchor">Contáctenos</a></li>
+    </ul>
+
+    <!-- Actions -->
+    <div class="nav-actions">
+      <ng-container *ngIf="!isLoggedIn">
+        <a routerLink="/login"    class="btn btn-ghost">Iniciar sesión</a>
+        <a routerLink="/register" class="btn btn-primary">Registrarse gratis</a>
+      </ng-container>
+      <ng-container *ngIf="isLoggedIn">
+        <a routerLink="/dashboard" class="btn btn-ghost">Mi Dashboard</a>
+        <button class="btn btn-outline" (click)="logout()">Salir</button>
+      </ng-container>
+    </div>
+
+    <!-- Hamburger -->
+    <button class="hamburger" (click)="toggleMenu()"
+            aria-label="Abrir menú" [attr.aria-expanded]="isMenuOpen">
+      <span [class.rotate-top]="isMenuOpen"></span>
+      <span [class.hide-mid]="isMenuOpen"></span>
+      <span [class.rotate-bot]="isMenuOpen"></span>
+    </button>
+
+  </div>
+</nav>

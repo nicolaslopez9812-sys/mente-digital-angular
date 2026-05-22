@@ -1,0 +1,80 @@
+<section class="section" id="cursos">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">Catálogo</span>
+      <h2 class="section-title">Cursos más populares</h2>
+      <p class="section-sub">Elige entre nuestras rutas de aprendizaje diseñadas con los estándares de la industria</p>
+    </div>
+
+    <div class="filters">
+      <button *ngFor="let f of filtros"
+        class="filter-btn"
+        [class.active]="filtroActivo === f"
+        (click)="filtrar(f)">
+        {{ filtroLabels[f] }}
+      </button>
+    </div>
+
+    <div class="cursos-grid">
+      <div *ngFor="let curso of cursosFiltrados"
+        class="curso-card"
+        (click)="abrirModal(curso)"
+        tabindex="0"
+        (keydown.enter)="abrirModal(curso)"
+        role="button"
+        [attr.aria-label]="'Ver detalles de ' + curso.nombre">
+        <div class="curso-header" [style.background]="curso.bg">{{ curso.emoji }}</div>
+        <div class="curso-body">
+          <span class="curso-tag" [class]="curso.tagClass">{{ curso.tag }}</span>
+          <h3 class="curso-name">{{ curso.nombre }}</h3>
+          <p class="curso-instructor">{{ curso.instructor }}</p>
+          <div class="curso-rating">★★★★★ <span>{{ curso.rating }} ({{ curso.reviews }} reseñas)</span></div>
+          <div class="curso-meta">
+            <span class="curso-horas">🕐 {{ curso.horas }}</span>
+            <span class="curso-precio">{{ curso.precio }}</span>
+          </div>
+          <div class="curso-hint">👆 Clic para ver detalles</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-cta">
+      <a routerLink="/cursos" class="btn btn-outline btn-lg">Ver todos los cursos →</a>
+    </div>
+  </div>
+</section>
+
+<!-- MODAL -->
+<div id="cursoModal" [class.open]="cursoSeleccionado !== null" *ngIf="cursoSeleccionado">
+  <div class="modal-backdrop" (click)="cerrarModal()"></div>
+  <div class="modal-box" role="dialog" aria-modal="true">
+    <button class="modal-close" (click)="cerrarModal()">✕</button>
+    <div class="modal-header">
+      <div class="modal-emoji" [style.background]="cursoSeleccionado.bg">{{ cursoSeleccionado.emoji }}</div>
+      <div class="modal-header-info">
+        <span class="curso-tag" [class]="cursoSeleccionado.tagClass">{{ cursoSeleccionado.tag }}</span>
+        <h2 class="modal-title">{{ cursoSeleccionado.nombre }}</h2>
+        <p class="modal-instructor">{{ cursoSeleccionado.instructor }}</p>
+      </div>
+    </div>
+    <div class="modal-meta">
+      <span>⭐ {{ cursoSeleccionado.rating }} <small>({{ cursoSeleccionado.reviews }} reseñas)</small></span>
+      <span>🕐 {{ cursoSeleccionado.horas }}</span>
+      <span class="modal-price">{{ cursoSeleccionado.precio }}</span>
+    </div>
+    <div class="modal-section">
+      <h3>🎯 Objetivo del curso</h3>
+      <p>{{ cursoSeleccionado.objetivo }}</p>
+    </div>
+    <div class="modal-section">
+      <h3>📋 Lo que aprenderás</h3>
+      <ul class="modal-temas">
+        <li *ngFor="let tema of cursoSeleccionado.temas">✓ {{ tema }}</li>
+      </ul>
+    </div>
+    <div class="modal-actions">
+      <a routerLink="/register" class="btn btn-primary btn-lg">Inscribirme ahora</a>
+      <button class="btn btn-ghost" (click)="cerrarModal()">Cerrar</button>
+    </div>
+  </div>
+</div>

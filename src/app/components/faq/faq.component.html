@@ -1,0 +1,22 @@
+<section class="section faq-section" id="faq">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-tag">FAQ</span>
+      <h2 class="section-title">Preguntas frecuentes</h2>
+      <p class="section-sub">Todo lo que necesitas saber antes de comenzar tu camino en Mente Digital AAA</p>
+    </div>
+    <div class="faq-grid">
+      <div *ngFor="let faq of faqs" class="faq-item">
+        <button class="faq-question"
+          [attr.aria-expanded]="faq.abierto"
+          (click)="toggle(faq)">
+          {{ faq.pregunta }}
+          <span class="faq-arrow" [style.transform]="faq.abierto ? 'rotate(180deg)' : 'rotate(0deg)'">▾</span>
+        </button>
+        <div class="faq-answer" [class.open]="faq.abierto">
+          <p>{{ faq.respuesta }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

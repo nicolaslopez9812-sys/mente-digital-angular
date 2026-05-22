@@ -1,0 +1,731 @@
+<div class="db-root">
+<app-accessibility-bar></app-accessibility-bar>
+
+
+  <!-- ═══════════════════════════════════════
+       SIDEBAR
+  ═══════════════════════════════════════ -->
+  <aside class="db-sidebar" [class.collapsed]="sidebarCollapsed">
+
+    <!-- Logo -->
+    <div class="sidebar-logo">
+      <a routerLink="/" class="logo" style="font-size:17px;white-space:nowrap">
+        Mente Digital <span>AAA</span>
+      </a>
+    </div>
+
+    <!-- Nav -->
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Principal</div>
+
+      <a class="sidebar-link" [class.active]="activeSection==='inicio'"
+         (click)="showSection('inicio')">
+        <span class="link-icon">🏠</span> Inicio
+      </a>
+      <a class="sidebar-link" [class.active]="activeSection==='mis-cursos'"
+         (click)="showSection('mis-cursos')">
+        <span class="link-icon">📚</span> Mis cursos
+      </a>
+      <a class="sidebar-link" [class.active]="activeSection==='calendario'"
+         (click)="showSection('calendario')">
+        <span class="link-icon">🗓️</span> Calendario
+      </a>
+      <a class="sidebar-link" [class.active]="activeSection==='comunidad'"
+         (click)="showSection('comunidad')">
+        <span class="link-icon">💬</span> Comunidad
+      </a>
+
+      <div class="nav-section-label" style="margin-top:1rem">Cuenta</div>
+
+      <a class="sidebar-link" [class.active]="activeSection==='perfil'"
+         (click)="showSection('perfil')">
+        <span class="link-icon">👤</span> Mi perfil
+      </a>
+      <a class="sidebar-link" [class.active]="activeSection==='configuracion'"
+         (click)="showSection('configuracion')">
+        <span class="link-icon">⚙️</span> Configuración
+      </a>
+      <a class="sidebar-link" (click)="logout()" style="cursor:pointer">
+        <span class="link-icon">🚪</span> Cerrar sesión
+      </a>
+    </nav>
+
+    <!-- Plan badge -->
+    <div class="sidebar-plan">
+      <div class="plan-icon">⚡</div>
+      <div>
+        <div class="plan-name">Plan Gratuito</div>
+        <div class="plan-sub">Actualiza a Pro</div>
+      </div>
+      <a routerLink="/" class="upgrade-btn" title="Actualizar plan">↑</a>
+    </div>
+  </aside>
+
+  <!-- Mobile overlay -->
+  <div class="db-overlay" *ngIf="isMobile && !sidebarCollapsed"
+       (click)="sidebarCollapsed=true"></div>
+
+  <!-- ═══════════════════════════════════════
+       RIGHT PANEL
+  ═══════════════════════════════════════ -->
+  <div class="db-right">
+
+    <!-- TOP BAR -->
+    <header class="db-topbar">
+      <button class="sidebar-toggle" (click)="toggleSidebar()" aria-label="Menú"
+              style="background:none;border:none;font-size:20px;cursor:pointer;color:var(--gray-600);padding:4px;flex-shrink:0">
+        ☰
+      </button>
+
+      <div class="topbar-search">
+        <span>🔍</span>
+        <input type="text" placeholder="Buscar cursos, lecciones..." />
+      </div>
+
+      <div class="topbar-right">
+        <button class="topbar-btn">🔔<span class="notif-dot"></span></button>
+        <div class="topbar-user">
+          <div class="user-avatar">{{ avatarLetter }}</div>
+          <span>{{ firstName }}</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- MAIN SCROLLABLE CONTENT -->
+    <main class="db-content">
+
+      <!-- ╔══════════════════════════════════╗
+           ║           INICIO                ║
+           ╚══════════════════════════════════╝ -->
+      <ng-container *ngIf="activeSection === 'inicio'">
+
+        <!-- Welcome Banner -->
+        <div class="welcome-banner">
+          <div class="welcome-text">
+            <div class="welcome-greeting">{{ greeting }}</div>
+            <h1 class="welcome-name">{{ firstName }}! 👋</h1>
+            <p>Tienes <strong>2 lecciones pendientes</strong> hoy. ¡Sigue con el ritmo!</p>
+          </div>
+          <div class="welcome-streak">
+            <div class="streak-fire">🔥</div>
+            <div class="streak-num">{{ streakCount }}</div>
+            <div class="streak-label">días seguidos</div>
+          </div>
+        </div>
+
+        <!-- Stats -->
+        <div class="dash-stats">
+          <div class="dash-stat-card">
+            <div class="dsc-icon" style="background:#E1F5EE">📚</div>
+            <div><div class="dsc-num">3</div><div class="dsc-label">Cursos activos</div></div>
+          </div>
+          <div class="dash-stat-card">
+            <div class="dsc-icon" style="background:#E6F1FB">⏱️</div>
+            <div><div class="dsc-num">12h</div><div class="dsc-label">Tiempo aprendido</div></div>
+          </div>
+          <div class="dash-stat-card">
+            <div class="dsc-icon" style="background:#FAECE7">🏆</div>
+            <div><div class="dsc-num">1</div><div class="dsc-label">Certificado</div></div>
+          </div>
+          <div class="dash-stat-card">
+            <div class="dsc-icon" style="background:#EEEDFE">⭐</div>
+            <div><div class="dsc-num">240</div><div class="dsc-label">Puntos XP</div></div>
+          </div>
+        </div>
+
+        <!-- Grid -->
+        <div class="dash-grid">
+          <div class="dash-col-main">
+
+            <!-- Continuar aprendiendo -->
+            <div class="dash-card">
+              <div class="card-head">
+                <h2>Continuar aprendiendo</h2>
+                <span class="card-link" (click)="showSection('mis-cursos')" style="cursor:pointer">Ver todos →</span>
+              </div>
+              <div class="course-progress-list">
+                <div class="cp-item">
+                  <div class="cp-icon" style="background:#E6F1FB">💻</div>
+                  <div class="cp-info">
+                    <div class="cp-name">React &amp; Node.js desde cero</div>
+                    <div class="cp-lesson">Lección 8: Hooks avanzados</div>
+                    <div class="cp-bar-wrap">
+                      <div class="cp-bar"><div class="cp-fill" style="width:68%;background:#185FA5"></div></div>
+                      <span>68%</span>
+                    </div>
+                  </div>
+                  <button class="cp-resume">▶</button>
+                </div>
+                <div class="cp-item">
+                  <div class="cp-icon" style="background:#FAECE7">🎨</div>
+                  <div class="cp-info">
+                    <div class="cp-name">Figma para UX Designers</div>
+                    <div class="cp-lesson">Lección 3: Componentes</div>
+                    <div class="cp-bar-wrap">
+                      <div class="cp-bar"><div class="cp-fill" style="width:32%;background:#D85A30"></div></div>
+                      <span>32%</span>
+                    </div>
+                  </div>
+                  <button class="cp-resume">▶</button>
+                </div>
+                <div class="cp-item">
+                  <div class="cp-icon" style="background:#E1F5EE">🤖</div>
+                  <div class="cp-info">
+                    <div class="cp-name">Python &amp; Machine Learning</div>
+                    <div class="cp-lesson">Lección 1: Introducción</div>
+                    <div class="cp-bar-wrap">
+                      <div class="cp-bar"><div class="cp-fill" style="width:5%;background:#1D9E75"></div></div>
+                      <span>5%</span>
+                    </div>
+                  </div>
+                  <button class="cp-resume">▶</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Actividad reciente -->
+            <div class="dash-card">
+              <div class="card-head"><h2>Actividad reciente</h2></div>
+              <div class="activity-list">
+                <div class="activity-item">
+                  <div class="act-icon">✅</div>
+                  <div class="act-info">
+                    <div class="act-title">Completaste "Introducción a React"</div>
+                    <div class="act-time">Hace 2 horas</div>
+                  </div>
+                  <div class="act-xp">+20 XP</div>
+                </div>
+                <div class="activity-item">
+                  <div class="act-icon">🏆</div>
+                  <div class="act-info">
+                    <div class="act-title">Logro "Primera semana" desbloqueado</div>
+                    <div class="act-time">Ayer</div>
+                  </div>
+                  <div class="act-xp">+50 XP</div>
+                </div>
+                <div class="activity-item">
+                  <div class="act-icon">📝</div>
+                  <div class="act-info">
+                    <div class="act-title">Entregaste proyecto "Landing Page"</div>
+                    <div class="act-time">Hace 3 días</div>
+                  </div>
+                  <div class="act-xp">+100 XP</div>
+                </div>
+              </div>
+            </div>
+
+          </div><!-- /dash-col-main -->
+
+          <div class="dash-col-side">
+
+            <!-- Esta semana -->
+            <div class="dash-card">
+              <div class="card-head"><h2>Esta semana</h2></div>
+              <div class="week-days" style="display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-bottom:0.75rem">
+                <div class="wday done">L<span>✓</span></div>
+                <div class="wday done">M<span>✓</span></div>
+                <div class="wday today">X<span>•</span></div>
+                <div class="wday">J<span></span></div>
+                <div class="wday">V<span></span></div>
+                <div class="wday">S<span></span></div>
+                <div class="wday">D<span></span></div>
+              </div>
+              <div class="goal-bar-label">Meta semanal</div>
+              <div class="goal-bar"><div class="goal-fill" style="width:43%"></div></div>
+              <div class="goal-nums">3 / 7 lecciones</div>
+            </div>
+
+            <!-- Clases en vivo -->
+            <div class="dash-card">
+              <div class="card-head"><h2>Clases en vivo</h2></div>
+              <div class="live-list">
+                <div class="live-item">
+                  <div class="live-badge">HOY</div>
+                  <div class="live-info">
+                    <div class="live-name">Fundamentos de Programación</div>
+                    <div class="live-time">6:00 PM · Carlos Vélez</div>
+                  </div>
+                  <button class="btn btn-primary" style="padding:5px 10px;font-size:11px;flex-shrink:0">Unirse</button>
+                </div>
+                <div class="live-item">
+                  <div class="live-badge" style="background:#E6F1FB;color:#185FA5">JUE</div>
+                  <div class="live-info">
+                    <div class="live-name">Q&amp;A React Avanzado</div>
+                    <div class="live-time">7:00 PM · Ana Torres</div>
+                  </div>
+                  <button class="btn btn-outline" style="padding:5px 10px;font-size:11px;flex-shrink:0">Recordar</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Logros -->
+            <div class="dash-card">
+              <div class="card-head"><h2>Tus logros</h2></div>
+              <div class="logros-grid">
+                <div class="logro earned" title="Primera semana completada">🔥</div>
+                <div class="logro earned" title="Primer curso inscrito">📚</div>
+                <div class="logro earned" title="Primer certificado">🏆</div>
+                <div class="logro locked" title="Completa 5 cursos">🎓</div>
+                <div class="logro locked" title="100 días seguidos">💎</div>
+                <div class="logro locked" title="Mentor comunidad">⭐</div>
+              </div>
+            </div>
+
+          </div><!-- /dash-col-side -->
+        </div><!-- /dash-grid -->
+      </ng-container>
+
+      <!-- ╔══════════════════════════════════╗
+           ║         MIS CURSOS              ║
+           ╚══════════════════════════════════╝ -->
+      <ng-container *ngIf="activeSection === 'mis-cursos'">
+        <div class="section-page-header">
+          <h1>📚 Mis Cursos</h1>
+          <a routerLink="/cursos" class="btn btn-primary">+ Explorar más cursos</a>
+        </div>
+
+        <div class="mis-cursos-tabs">
+          <button class="mc-tab" [class.active]="tabActivo==='activos'"
+                  (click)="tabActivo='activos'">En progreso (3)</button>
+          <button class="mc-tab" [class.active]="tabActivo==='completados'"
+                  (click)="tabActivo='completados'">Completados (1)</button>
+        </div>
+
+        <div class="mis-cursos-grid" *ngIf="tabActivo==='activos'">
+          <div class="mi-curso-card">
+            <div class="mcc-header" style="background:#E6F1FB">💻</div>
+            <div class="mcc-body">
+              <span class="curso-tag tag-tech">Tecnología</span>
+              <h3>React &amp; Node.js desde cero</h3>
+              <p class="mcc-instructor">por Ana Torres</p>
+              <div class="cp-bar-wrap" style="margin:8px 0">
+                <div class="cp-bar"><div class="cp-fill" style="width:68%;background:#185FA5"></div></div>
+                <span>68%</span>
+              </div>
+              <div class="mcc-meta"><span>📖 Lec. 8/12</span><span>⏱️ 22h rest.</span></div>
+              <button class="btn btn-primary" style="width:100%;margin-top:0.75rem">▶ Continuar</button>
+            </div>
+          </div>
+          <div class="mi-curso-card">
+            <div class="mcc-header" style="background:#FAECE7">🎨</div>
+            <div class="mcc-body">
+              <span class="curso-tag tag-design">Diseño</span>
+              <h3>Figma para UX Designers</h3>
+              <p class="mcc-instructor">por Marcos Ríos</p>
+              <div class="cp-bar-wrap" style="margin:8px 0">
+                <div class="cp-bar"><div class="cp-fill" style="width:32%;background:#D85A30"></div></div>
+                <span>32%</span>
+              </div>
+              <div class="mcc-meta"><span>📖 Lec. 3/8</span><span>⏱️ 16h rest.</span></div>
+              <button class="btn btn-primary" style="width:100%;margin-top:0.75rem">▶ Continuar</button>
+            </div>
+          </div>
+          <div class="mi-curso-card">
+            <div class="mcc-header" style="background:#E1F5EE">🤖</div>
+            <div class="mcc-body">
+              <span class="curso-tag tag-data">Datos</span>
+              <h3>Python &amp; Machine Learning</h3>
+              <p class="mcc-instructor">por David Mora</p>
+              <div class="cp-bar-wrap" style="margin:8px 0">
+                <div class="cp-bar"><div class="cp-fill" style="width:5%;background:#1D9E75"></div></div>
+                <span>5%</span>
+              </div>
+              <div class="mcc-meta"><span>📖 Lec. 1/16</span><span>⏱️ 38h rest.</span></div>
+              <button class="btn btn-primary" style="width:100%;margin-top:0.75rem">▶ Continuar</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="mis-cursos-grid" *ngIf="tabActivo==='completados'">
+          <div class="mi-curso-card completado">
+            <div class="mcc-header" style="background:#E1F5EE">🌐</div>
+            <div class="mcc-body">
+              <span class="curso-tag tag-tech">Tecnología</span>
+              <h3>HTML &amp; CSS desde cero</h3>
+              <p class="mcc-instructor">por Carlos Vélez</p>
+              <div class="cp-bar-wrap" style="margin:8px 0">
+                <div class="cp-bar"><div class="cp-fill" style="width:100%;background:#1D9E75"></div></div>
+                <span>100%</span>
+              </div>
+              <div class="mcc-meta"><span>✅ Completado el 12 Mar 2025</span></div>
+              <button class="btn btn-outline" style="width:100%;margin-top:0.75rem">🏆 Ver certificado</button>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+
+      <!-- ╔══════════════════════════════════╗
+           ║          CALENDARIO             ║
+           ╚══════════════════════════════════╝ -->
+      <ng-container *ngIf="activeSection === 'calendario'">
+        <div class="section-page-header"><h1>🗓️ Calendario de Aprendizaje</h1></div>
+
+        <div class="dash-grid">
+          <div class="dash-col-main">
+            <div class="dash-card">
+              <div class="card-head">
+                <h2>Mayo 2025</h2>
+                <div style="display:flex;gap:6px">
+                  <button class="cal-nav">‹</button>
+                  <button class="cal-nav">›</button>
+                </div>
+              </div>
+              <div class="calendario-grid">
+                <div class="cal-weekday">Lun</div><div class="cal-weekday">Mar</div>
+                <div class="cal-weekday">Mié</div><div class="cal-weekday">Jue</div>
+                <div class="cal-weekday">Vie</div><div class="cal-weekday">Sáb</div>
+                <div class="cal-weekday">Dom</div>
+                <!-- Semana 1 -->
+                <div class="cal-day empty"></div><div class="cal-day empty"></div><div class="cal-day empty"></div>
+                <div class="cal-day">1</div>
+                <div class="cal-day has-event">2<span class="cal-dot"></span></div>
+                <div class="cal-day">3</div><div class="cal-day">4</div>
+                <!-- Semana 2 -->
+                <div class="cal-day has-event">5<span class="cal-dot"></span></div>
+                <div class="cal-day has-event">6<span class="cal-dot"></span></div>
+                <div class="cal-day done-day">7<span class="cal-check">✓</span></div>
+                <div class="cal-day done-day">8<span class="cal-check">✓</span></div>
+                <div class="cal-day has-event">9<span class="cal-dot"></span></div>
+                <div class="cal-day">10</div><div class="cal-day">11</div>
+                <!-- Semana 3 -->
+                <div class="cal-day done-day">12<span class="cal-check">✓</span></div>
+                <div class="cal-day done-day">13<span class="cal-check">✓</span></div>
+                <div class="cal-day today-day">14</div>
+                <div class="cal-day has-event">15<span class="cal-dot"></span></div>
+                <div class="cal-day has-event">16<span class="cal-dot"></span></div>
+                <div class="cal-day">17</div><div class="cal-day">18</div>
+                <!-- Semana 4 -->
+                <div class="cal-day">19</div>
+                <div class="cal-day has-event">20<span class="cal-dot"></span></div>
+                <div class="cal-day">21</div>
+                <div class="cal-day has-event">22<span class="cal-dot"></span></div>
+                <div class="cal-day">23</div><div class="cal-day">24</div><div class="cal-day">25</div>
+                <!-- Semana 5 -->
+                <div class="cal-day">26</div><div class="cal-day">27</div>
+                <div class="cal-day">28</div><div class="cal-day">29</div>
+                <div class="cal-day has-event">30<span class="cal-dot"></span></div>
+                <div class="cal-day">31</div>
+              </div>
+              <div class="cal-leyenda">
+                <span><span class="cal-dot" style="display:inline-block;margin-right:3px;vertical-align:middle"></span>Clase programada</span>
+                <span><span style="color:var(--green-500);margin-right:3px">✓</span>Completado</span>
+                <span><span style="background:var(--green-900);color:#fff;padding:1px 5px;border-radius:4px;font-size:10px;margin-right:3px">14</span>Hoy</span>
+              </div>
+            </div>
+
+            <div class="dash-card">
+              <div class="card-head"><h2>Meta mensual</h2></div>
+              <div style="text-align:center;padding:0.5rem 0">
+                <div style="font-family:var(--font-display);font-size:40px;font-weight:900;color:var(--green-700)">58%</div>
+                <div style="font-size:13px;color:var(--gray-600);margin:4px 0 10px">14 / 24 lecciones completadas</div>
+                <div class="goal-bar" style="height:8px"><div class="goal-fill" style="width:58%"></div></div>
+                <div style="font-size:12px;color:var(--gray-600);margin-top:8px">¡10 lecciones más para cumplir tu meta! 🎯</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="dash-col-side">
+            <div class="dash-card">
+              <div class="card-head"><h2>Horario esta semana</h2></div>
+              <div class="horario-list">
+                <div class="horario-item">
+                  <div class="h-dia lun">LUN</div>
+                  <div class="h-info"><div class="h-curso">React &amp; Node.js</div><div class="h-hora">7:00 PM – 8:30 PM</div></div>
+                  <span class="h-badge completada">✓</span>
+                </div>
+                <div class="horario-item">
+                  <div class="h-dia mar">MAR</div>
+                  <div class="h-info"><div class="h-curso">Figma UX Designers</div><div class="h-hora">6:00 PM – 7:30 PM</div></div>
+                  <span class="h-badge completada">✓</span>
+                </div>
+                <div class="horario-item">
+                  <div class="h-dia mie">MIÉ</div>
+                  <div class="h-info"><div class="h-curso">Python &amp; ML</div><div class="h-hora">8:00 PM – 9:00 PM</div></div>
+                  <span class="h-badge hoy">HOY</span>
+                </div>
+                <div class="horario-item">
+                  <div class="h-dia jue">JUE</div>
+                  <div class="h-info"><div class="h-curso">Q&amp;A React Avanzado</div><div class="h-hora">7:00 PM – 8:00 PM</div></div>
+                  <span class="h-badge proxima">Próx.</span>
+                </div>
+                <div class="horario-item">
+                  <div class="h-dia vie">VIE</div>
+                  <div class="h-info"><div class="h-curso">Proyecto Final UX</div><div class="h-hora">6:30 PM – 8:00 PM</div></div>
+                  <span class="h-badge proxima">Próx.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+
+      <!-- ╔══════════════════════════════════╗
+           ║          COMUNIDAD              ║
+           ╚══════════════════════════════════╝ -->
+      <ng-container *ngIf="activeSection === 'comunidad'">
+        <div class="section-page-header">
+          <h1>💬 Comunidad</h1>
+          <button class="btn btn-primary">+ Nuevo post</button>
+        </div>
+
+        <div class="dash-stats" style="margin-bottom:1.25rem">
+          <div class="dash-stat-card"><div class="dsc-icon" style="background:#E1F5EE">👥</div><div><div class="dsc-num">50K+</div><div class="dsc-label">Miembros</div></div></div>
+          <div class="dash-stat-card"><div class="dsc-icon" style="background:#E6F1FB">💬</div><div><div class="dsc-num">1.2K</div><div class="dsc-label">Posts hoy</div></div></div>
+          <div class="dash-stat-card"><div class="dsc-icon" style="background:#FAECE7">🔥</div><div><div class="dsc-num">34</div><div class="dsc-label">Activas</div></div></div>
+          <div class="dash-stat-card"><div class="dsc-icon" style="background:#EEEDFE">🏅</div><div><div class="dsc-num">Top 15%</div><div class="dsc-label">Tu ranking</div></div></div>
+        </div>
+
+        <div class="dash-grid">
+          <div class="dash-col-main">
+            <div class="dash-card">
+              <div class="card-head"><h2>Foro general</h2></div>
+              <div class="foro-list">
+                <div class="foro-item">
+                  <div class="foro-avatar" style="background:#E6F1FB">JA</div>
+                  <div class="foro-info">
+                    <div class="foro-title">¿Cuándo debería pasar de HTML/CSS a JavaScript?</div>
+                    <div class="foro-meta">Juan Acevedo · Hace 1 hora · <span class="foro-tag-react">React</span></div>
+                  </div>
+                  <div class="foro-stats">💬 12 &nbsp; ❤️ 8</div>
+                </div>
+                <div class="foro-item">
+                  <div class="foro-avatar" style="background:#FAECE7">SA</div>
+                  <div class="foro-info">
+                    <div class="foro-title">Comparto mi proyecto final de Figma – Landing page para app</div>
+                    <div class="foro-meta">Stiven Arévalo · Hace 3 horas · <span class="foro-tag-design">Diseño</span></div>
+                  </div>
+                  <div class="foro-stats">💬 5 &nbsp; ❤️ 23</div>
+                </div>
+                <div class="foro-item">
+                  <div class="foro-avatar" style="background:#E1F5EE">JA</div>
+                  <div class="foro-info">
+                    <div class="foro-title">Error al instalar dependencias con npm – ¿alguien ha tenido este problema?</div>
+                    <div class="foro-meta">Jaider Avendaño · Hace 5 horas · <span class="foro-tag-react">Tecnología</span></div>
+                  </div>
+                  <div class="foro-stats">💬 9 &nbsp; ❤️ 4</div>
+                </div>
+                <div class="foro-item">
+                  <div class="foro-avatar" style="background:#EEEDFE">MR</div>
+                  <div class="foro-info">
+                    <div class="foro-title">Recursos gratuitos para aprender Machine Learning en español</div>
+                    <div class="foro-meta">María Rodríguez · Ayer · <span class="foro-tag-design" style="background:var(--green-50);color:var(--green-700)">Datos</span></div>
+                  </div>
+                  <div class="foro-stats">💬 31 &nbsp; ❤️ 67</div>
+                </div>
+                <div class="foro-item">
+                  <div class="foro-avatar" style="background:#E6F1FB">CP</div>
+                  <div class="foro-info">
+                    <div class="foro-title">¿Cómo conseguir el primer trabajo como desarrollador sin experiencia?</div>
+                    <div class="foro-meta">Carlos Pérez · Hace 2 días · <span class="foro-tag-react">Carrera</span></div>
+                  </div>
+                  <div class="foro-stats">💬 45 &nbsp; ❤️ 92</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="dash-col-side">
+            <div class="dash-card">
+              <div class="card-head"><h2>Top colaboradores</h2></div>
+              <div style="display:flex;flex-direction:column;gap:10px">
+                <div style="display:flex;align-items:center;gap:8px">
+                  <span style="font-size:18px">🥇</span>
+                  <div class="foro-avatar" style="background:#E6F1FB;width:30px;height:30px;font-size:11px">AT</div>
+                  <div><div style="font-size:13px;font-weight:500">Ana Torres</div><div style="font-size:11px;color:var(--gray-600)">342 pts · Instructora</div></div>
+                </div>
+                <div style="display:flex;align-items:center;gap:8px">
+                  <span style="font-size:18px">🥈</span>
+                  <div class="foro-avatar" style="background:#FAECE7;width:30px;height:30px;font-size:11px">MR</div>
+                  <div><div style="font-size:13px;font-weight:500">María Rodríguez</div><div style="font-size:11px;color:var(--gray-600)">289 pts · Est.</div></div>
+                </div>
+                <div style="display:flex;align-items:center;gap:8px">
+                  <span style="font-size:18px">🥉</span>
+                  <div class="foro-avatar" style="background:#E1F5EE;width:30px;height:30px;font-size:11px">CP</div>
+                  <div><div style="font-size:13px;font-weight:500">Carlos Pérez</div><div style="font-size:11px;color:var(--gray-600)">201 pts · Est.</div></div>
+                </div>
+              </div>
+            </div>
+            <div class="dash-card">
+              <div class="card-head"><h2>Grupos de estudio</h2></div>
+              <div style="display:flex;flex-direction:column;gap:8px">
+                <div class="grupo-item"><span style="font-size:18px">⚛️</span><div style="flex:1"><div style="font-size:13px;font-weight:500">Grupo React Bogotá</div><div style="font-size:11px;color:var(--gray-600)">128 miembros</div></div><button class="btn btn-outline" style="padding:3px 10px;font-size:12px">Unirme</button></div>
+                <div class="grupo-item"><span style="font-size:18px">🎨</span><div style="flex:1"><div style="font-size:13px;font-weight:500">UX/UI Colombia</div><div style="font-size:11px;color:var(--gray-600)">95 miembros</div></div><button class="btn btn-outline" style="padding:3px 10px;font-size:12px">Unirme</button></div>
+                <div class="grupo-item"><span style="font-size:18px">🤖</span><div style="flex:1"><div style="font-size:13px;font-weight:500">Python &amp; IA Latam</div><div style="font-size:11px;color:var(--gray-600)">214 miembros</div></div><button class="btn btn-primary" style="padding:3px 10px;font-size:12px">Miembro ✓</button></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+
+      <!-- ╔══════════════════════════════════╗
+           ║           MI PERFIL             ║
+           ╚══════════════════════════════════╝ -->
+      <ng-container *ngIf="activeSection === 'perfil'">
+        <div class="section-page-header"><h1>👤 Mi Perfil</h1></div>
+        <div class="dash-grid">
+          <div class="dash-col-main">
+            <div class="dash-card">
+              <h2 style="font-family:var(--font-display);font-size:16px;margin-bottom:1.25rem">Información personal</h2>
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Nombre</label>
+                  <input type="text" [(ngModel)]="perfil.nombre" placeholder="Tu nombre" />
+                </div>
+                <div class="form-group">
+                  <label>Apellido</label>
+                  <input type="text" [(ngModel)]="perfil.apellido" placeholder="Tu apellido" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Correo electrónico</label>
+                <input type="email" [value]="user?.email || ''" readonly
+                       style="background:var(--gray-100);cursor:not-allowed" />
+              </div>
+              <div class="form-group">
+                <label>Ocupación</label>
+                <input type="text" [(ngModel)]="perfil.ocupacion"
+                       placeholder="Ej: Estudiante de Ing. Sistemas" />
+              </div>
+              <button class="btn btn-primary" (click)="savePerfil()">Guardar cambios</button>
+              <span *ngIf="perfilSaved"
+                    style="margin-left:10px;color:var(--green-500);font-size:13px;vertical-align:middle">
+                ✓ Guardado correctamente
+              </span>
+            </div>
+
+            <div class="dash-card">
+              <h2 style="font-family:var(--font-display);font-size:16px;margin-bottom:1.25rem">Cambiar contraseña</h2>
+              <div class="form-group"><label>Contraseña actual</label><input type="password" placeholder="••••••••" /></div>
+              <div class="form-group"><label>Nueva contraseña</label><input type="password" placeholder="Mínimo 8 caracteres" /></div>
+              <div class="form-group"><label>Confirmar nueva contraseña</label><input type="password" placeholder="Repite la contraseña" /></div>
+              <button class="btn btn-outline">Actualizar contraseña</button>
+            </div>
+          </div>
+
+          <div class="dash-col-side">
+            <div class="dash-card" style="text-align:center">
+              <div class="perfil-avatar-big">{{ avatarLetter }}</div>
+              <div class="perfil-nombre-big">{{ firstName }}</div>
+              <div style="font-size:12px;color:var(--gray-600);margin-bottom:1rem">
+                Plan Gratuito · Desde Ene 2025
+              </div>
+              <button class="btn btn-outline" style="width:100%;margin-bottom:8px">📷 Cambiar foto</button>
+              <a routerLink="/" class="btn btn-primary" style="width:100%;display:flex;justify-content:center">
+                ⚡ Actualizar a Pro
+              </a>
+            </div>
+
+            <div class="dash-card">
+              <div class="card-head"><h2>Mis estadísticas</h2></div>
+              <div>
+                <div class="perfil-stat"><span>📚 Cursos completados</span><strong>1</strong></div>
+                <div class="perfil-stat"><span>⏱️ Horas aprendidas</span><strong>12h</strong></div>
+                <div class="perfil-stat"><span>🏆 Certificados</span><strong>1</strong></div>
+                <div class="perfil-stat"><span>🔥 Mejor racha</span><strong>7 días</strong></div>
+                <div class="perfil-stat"><span>⭐ Puntos XP</span><strong>240</strong></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+
+      <!-- ╔══════════════════════════════════╗
+           ║        CONFIGURACIÓN            ║
+           ╚══════════════════════════════════╝ -->
+      <ng-container *ngIf="activeSection === 'configuracion'">
+        <div class="section-page-header"><h1>⚙️ Configuración</h1></div>
+        <div class="config-grid">
+
+          <div class="dash-card">
+            <h2 style="font-family:var(--font-display);font-size:16px;margin-bottom:1rem">🔔 Notificaciones</h2>
+            <div class="config-list">
+              <div class="config-item">
+                <div><div class="ci-label">Recordatorios de clase</div><div class="ci-sub">Aviso 15 min antes de cada clase</div></div>
+                <label class="toggle"><input type="checkbox" checked /><span class="toggle-slider"></span></label>
+              </div>
+              <div class="config-item">
+                <div><div class="ci-label">Mensajes en foro</div><div class="ci-sub">Cuando alguien responda tus posts</div></div>
+                <label class="toggle"><input type="checkbox" checked /><span class="toggle-slider"></span></label>
+              </div>
+              <div class="config-item">
+                <div><div class="ci-label">Novedades y ofertas</div><div class="ci-sub">Cursos nuevos y descuentos especiales</div></div>
+                <label class="toggle"><input type="checkbox" /><span class="toggle-slider"></span></label>
+              </div>
+              <div class="config-item">
+                <div><div class="ci-label">Resumen semanal por email</div><div class="ci-sub">Tu progreso cada domingo</div></div>
+                <label class="toggle"><input type="checkbox" checked /><span class="toggle-slider"></span></label>
+              </div>
+            </div>
+          </div>
+
+          <div class="dash-card">
+            <h2 style="font-family:var(--font-display);font-size:16px;margin-bottom:1rem">🎨 Apariencia</h2>
+            <div class="config-list">
+              <div class="config-item">
+                <div><div class="ci-label">Modo oscuro</div><div class="ci-sub">Reduce la fatiga visual nocturna</div></div>
+                <label class="toggle">
+                  <input type="checkbox" [checked]="isDark" (change)="toggleTheme()" />
+                  <span class="toggle-slider"></span>
+                </label>
+              </div>
+              <div class="config-item">
+                <div><div class="ci-label">Reproducción automática</div><div class="ci-sub">Pasar al siguiente video automáticamente</div></div>
+                <label class="toggle"><input type="checkbox" checked /><span class="toggle-slider"></span></label>
+              </div>
+              <div class="config-item">
+                <div><div class="ci-label">Velocidad de reproducción</div><div class="ci-sub">Velocidad por defecto de los videos</div></div>
+                <select class="config-select">
+                  <option>0.75x</option><option selected>1x</option>
+                  <option>1.25x</option><option>1.5x</option><option>2x</option>
+                </select>
+              </div>
+              <div class="config-item">
+                <div><div class="ci-label">Subtítulos por defecto</div><div class="ci-sub">Mostrar subtítulos en todos los videos</div></div>
+                <label class="toggle"><input type="checkbox" /><span class="toggle-slider"></span></label>
+              </div>
+            </div>
+          </div>
+
+          <div class="dash-card">
+            <h2 style="font-family:var(--font-display);font-size:16px;margin-bottom:1rem">🎓 Aprendizaje</h2>
+            <div class="config-list">
+              <div class="config-item">
+                <div><div class="ci-label">Meta diaria de lecciones</div><div class="ci-sub">Cuántas lecciones quieres ver por día</div></div>
+                <select class="config-select">
+                  <option>1 lección</option><option selected>2 lecciones</option>
+                  <option>3 lecciones</option><option>5 lecciones</option>
+                </select>
+              </div>
+              <div class="config-item">
+                <div><div class="ci-label">Modo sin conexión</div><div class="ci-sub">Descargar lecciones para ver sin internet</div></div>
+                <label class="toggle"><input type="checkbox" /><span class="toggle-slider"></span></label>
+              </div>
+            </div>
+          </div>
+
+          <div class="dash-card">
+            <h2 style="font-family:var(--font-display);font-size:16px;margin-bottom:1rem">💳 Plan actual</h2>
+            <div style="background:var(--green-50);border-radius:var(--radius-md);padding:1rem;margin-bottom:1rem">
+              <div style="font-family:var(--font-display);font-size:18px;font-weight:700;color:var(--green-900)">
+                Plan Gratuito
+              </div>
+              <div style="font-size:12px;color:var(--green-700);margin-top:3px">
+                5 cursos · Sin certificados · Sin mentorías
+              </div>
+            </div>
+            <a routerLink="/" class="btn btn-primary"
+               style="width:100%;display:flex;justify-content:center;margin-bottom:8px">
+              ⚡ Actualizar a Pro – $59.000/mes
+            </a>
+            <div style="font-size:11px;color:var(--gray-500);text-align:center">
+              Sin contratos · Cancela cuando quieras
+            </div>
+          </div>
+
+        </div>
+      </ng-container>
+
+    </main>
+  </div><!-- /db-right -->
+
+</div><!-- /db-root -->
