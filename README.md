@@ -1,9 +1,5 @@
 # Mente Digital AAA – Proyecto Angular
-### Proyecto UN_01_EN | Ingeniería Web I
-
----
-
-## 🅰️ Tecnología: Angular 17 (Standalone Components)
+### Proyecto UN_01_EN | Ingeniería Web II
 
 ## 🚀 Cómo ejecutar
 
@@ -34,4 +30,3 @@ ng serve
 npm audit
 ```
 
-Las vulnerabilidades de tipo `high` reportadas son en herramientas de desarrollo (`webpack`, `esbuild`, etc.) y **no exponen la aplicación** al usuario final. El `package.json` ya incluye `overrides` para mitigar las más críticas.
