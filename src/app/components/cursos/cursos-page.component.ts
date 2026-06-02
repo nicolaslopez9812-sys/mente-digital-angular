@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { NavbarComponent } from '../navbar/navbar.component';
-import { CursosService, Curso } from '../../services/cursos.service';
+import { Curso, CursoService } from '../../services/curso.service';
 import { AccessibilityBarComponent } from '../accessibility/accessibility-bar.component';
 
 @Component({
@@ -24,11 +24,13 @@ export class CursosPageComponent implements OnInit {
   cursosFiltrados: Curso[] = [];
   cursoSeleccionado: Curso | null = null;
 
-  constructor(private cursosService: CursosService) {}
+  constructor(private cursoService: CursoService) {}
 
   ngOnInit(): void {
-    this.todosCursos = this.cursosService.getAll();
-    this.aplicarFiltro();
+    this.cursoService.listarCursos().subscribe((cursos) => {
+      this.todosCursos = cursos;
+      this.aplicarFiltro();
+    });
   }
 
   filtrar(cat: string): void { this.filtroActivo = cat; this.aplicarFiltro(); }

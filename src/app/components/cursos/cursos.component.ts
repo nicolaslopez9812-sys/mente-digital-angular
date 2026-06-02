@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { CursosService, Curso } from '../../services/cursos.service';
+import { Curso, CursoService } from '../../services/curso.service';
 
 @Component({
   selector: 'app-cursos',
@@ -16,16 +16,24 @@ export class CursosComponent implements OnInit {
     diseno: 'Diseño', negocios: 'Negocios', datos: 'Datos'
   };
   filtroActivo = 'all';
+  todosCursos: Curso[] = [];
   cursosFiltrados: Curso[] = [];
   cursoSeleccionado: Curso | null = null;
 
-  constructor(private cursosService: CursosService) {}
+  constructor(private cursoService: CursoService) {}
 
-  ngOnInit(): void { this.filtrar('all'); }
+  ngOnInit(): void {
+    this.cursoService.listarCursos().subscribe((cursos) => {
+      this.todosCursos = cursos;
+      this.filtrar(this.filtroActivo);
+    });
+  }
 
   filtrar(cat: string): void {
     this.filtroActivo = cat;
-    this.cursosFiltrados = this.cursosService.getByCategoria(cat);
+    this.cursosFiltrados = cat === 'all'
+      ? this.todosCursos
+      : this.todosCursos.filter(c => c.categoria === cat);
   }
 
   abrirModal(curso: Curso): void { this.cursoSeleccionado = curso; document.body.style.overflow = 'hidden'; }
