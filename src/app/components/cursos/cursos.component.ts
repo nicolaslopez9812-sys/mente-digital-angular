@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { Curso, CursoService } from '../../services/curso.service';
@@ -9,7 +9,7 @@ import { Curso, CursoService } from '../../services/curso.service';
   imports: [CommonModule, RouterLink],
   templateUrl: './cursos.component.html'
 })
-export class CursosComponent implements OnInit {
+export class CursosComponent implements OnInit, OnDestroy {
   filtros = ['all', 'tecnologia', 'diseno', 'negocios', 'datos'];
   filtroLabels: Record<string, string> = {
     all: 'Todos', tecnologia: 'Tecnología',
@@ -27,6 +27,10 @@ export class CursosComponent implements OnInit {
       this.todosCursos = cursos;
       this.filtrar(this.filtroActivo);
     });
+  }
+
+  ngOnDestroy(): void {
+    document.body.style.overflow = '';
   }
 
   filtrar(cat: string): void {

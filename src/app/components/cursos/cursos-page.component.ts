@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
@@ -12,7 +12,7 @@ import { AccessibilityBarComponent } from '../accessibility/accessibility-bar.co
   imports: [CommonModule, FormsModule, RouterLink, NavbarComponent, AccessibilityBarComponent],
   templateUrl: './cursos-page.component.html'
 })
-export class CursosPageComponent implements OnInit {
+export class CursosPageComponent implements OnInit, OnDestroy {
   filtros = ['all', 'tecnologia', 'diseno', 'negocios', 'datos'];
   filtroLabels: Record<string, string> = {
     all: 'Todos', tecnologia: 'Tecnología',
@@ -31,6 +31,10 @@ export class CursosPageComponent implements OnInit {
       this.todosCursos = cursos;
       this.aplicarFiltro();
     });
+  }
+
+  ngOnDestroy(): void {
+    document.body.style.overflow = '';
   }
 
   filtrar(cat: string): void { this.filtroActivo = cat; this.aplicarFiltro(); }

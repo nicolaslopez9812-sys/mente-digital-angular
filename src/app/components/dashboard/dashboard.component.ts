@@ -108,7 +108,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.user = this.auth.getSession();
     this.perfil.nombre    = this.user?.nombre || '';
     this.perfil.apellido  = this.user?.apellido || '';
-    this.perfil.ocupacion = (this.user as any)?.ocupacion || '';
+    this.perfil.ocupacion = this.user?.ocupacion || '';
     this.greeting = this.getGreeting();
     this.sub = this.theme.isDark.subscribe(d => this.isDark = d);
     this.checkMobile();
