@@ -27,8 +27,9 @@ export class RegisterComponent {
     if (this.password.length < 8) { this.error = 'La contraseña debe tener al menos 8 caracteres.'; return; }
     if (this.password !== this.confirm) { this.error = 'Las contraseñas no coinciden.'; return; }
     this.loading = true; this.error = '';
-    const err = this.auth.register(this.nombre, this.apellido, this.email, this.password);
-    if (err) { this.error = err; this.loading = false; return; }
-    setTimeout(() => this.router.navigate(['/dashboard']), 1000);
+    this.auth.register(this.nombre, this.apellido, this.email, this.password).subscribe((err) => {
+      if (err) { this.error = err; this.loading = false; return; }
+      setTimeout(() => this.router.navigate(['/dashboard']), 1000);
+    });
   }
 }

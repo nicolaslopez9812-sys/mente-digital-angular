@@ -5,6 +5,9 @@
     "ng": "ng",
     "start": "ng serve --open",
     "api": "json-server --watch db.json --port 3000",
+    "api:real": "npm --prefix backend run dev",
+    "api:setup": "npm --prefix backend install && npm --prefix backend run prisma:generate && npm --prefix backend run db:init && npm --prefix backend run db:seed",
+    "api:test": "npm --prefix backend run test:api",
     "build": "ng build",
     "build:prod": "ng build --configuration production",
     "watch": "ng build --watch --configuration development"

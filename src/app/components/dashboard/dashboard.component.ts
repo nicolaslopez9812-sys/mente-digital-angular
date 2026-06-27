@@ -134,10 +134,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
   logout(): void        { this.auth.logout(); }
 
   savePerfil(): void {
-    this.auth.updateProfile(this.perfil);
-    this.user = this.auth.getSession();
-    this.perfilSaved = true;
-    setTimeout(() => this.perfilSaved = false, 2500);
+    this.auth.updateProfile(this.perfil).subscribe((user) => {
+      this.user = user || this.auth.getSession();
+      this.perfilSaved = true;
+      setTimeout(() => this.perfilSaved = false, 2500);
+    });
   }
 
   get firstName(): string    { return this.user?.nombre || this.user?.email?.split('@')[0] || 'Estudiante'; }

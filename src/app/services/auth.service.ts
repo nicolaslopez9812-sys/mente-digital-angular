@@ -1,41 +1,40 @@
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { Observable, catchError, map, of, tap } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 export interface User {
+  id?: number;
   nombre: string;
   apellido: string;
   email: string;
-  password?: string;
   ocupacion?: string;
   createdAt?: string;
 }
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private readonly USERS_KEY   = 'mentedigital_users';
   private readonly SESSION_KEY = 'mentedigital_user';
   private readonly THEME_KEY   = 'mentedigital_theme';
+  private readonly apiUrl = `${environment.apiUrl}/auth`;
 
-  constructor(private router: Router) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
-  register(nombre: string, apellido: string, email: string, password: string): string | null {
-    const users: User[] = this.getUsers();
-    if (users.find(u => u.email === email.toLowerCase())) {
-      return 'Ya existe una cuenta con ese correo.';
-    }
-    const newUser: User = { nombre, apellido, email: email.toLowerCase(), password, createdAt: new Date().toISOString() };
-    users.push(newUser);
-    localStorage.setItem(this.USERS_KEY, JSON.stringify(users));
-    this.saveSession({ nombre, apellido, email: email.toLowerCase() });
-    return null;
+  register(nombre: string, apellido: string, email: string, password: string): Observable<string | null> {
+    return this.http.post<User>(`${this.apiUrl}/register`, { nombre, apellido, email, password }).pipe(
+      tap((user) => this.saveSession(user)),
+      map(() => null),
+      catchError((error: HttpErrorResponse) => of(error.error?.message || 'No fue posible crear la cuenta.'))
+    );
   }
 
-  login(email: string, password: string): string | null {
-    const users: User[] = this.getUsers();
-    const user = users.find(u => u.email === email.toLowerCase() && u.password === password);
-    if (!user) return 'Correo o contraseña incorrectos.';
-    this.saveSession({ nombre: user.nombre, apellido: user.apellido, email: user.email });
-    return null;
+  login(email: string, password: string): Observable<string | null> {
+    return this.http.post<User>(`${this.apiUrl}/login`, { email, password }).pipe(
+      tap((user) => this.saveSession(user)),
+      map(() => null),
+      catchError((error: HttpErrorResponse) => of(error.error?.message || 'Correo o contraseña incorrectos.'))
+    );
   }
 
   logout(): void {
@@ -50,23 +49,19 @@ export class AuthService {
 
   isLoggedIn(): boolean { return !!this.getSession(); }
 
-  updateProfile(data: Partial<User>): void {
+  updateProfile(data: Partial<User>): Observable<User | null> {
     const session = this.getSession();
-    if (!session) return;
-    const updated = { ...session, ...data };
-    this.saveSession(updated);
-    const users: User[] = this.getUsers();
-    const idx = users.findIndex(u => u.email === session.email);
-    if (idx > -1) { users[idx] = { ...users[idx], ...data }; localStorage.setItem(this.USERS_KEY, JSON.stringify(users)); }
+    if (!session) return of(null);
+
+    return this.http.patch<User>(`${this.apiUrl}/profile/${encodeURIComponent(session.email)}`, data).pipe(
+      tap((user) => this.saveSession(user)),
+      catchError(() => of(null))
+    );
   }
 
   getTheme(): string { return localStorage.getItem(this.THEME_KEY) || 'light'; }
   setTheme(t: string): void { localStorage.setItem(this.THEME_KEY, t); }
 
-  private getUsers(): User[] {
-    const raw = localStorage.getItem(this.USERS_KEY);
-    return raw ? JSON.parse(raw) : [];
-  }
   private saveSession(u: User): void {
     localStorage.setItem(this.SESSION_KEY, JSON.stringify(u));
   }

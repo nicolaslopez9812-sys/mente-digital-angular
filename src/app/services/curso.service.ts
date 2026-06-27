@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { catchError, map, of } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 export interface Curso {
   id: number;
@@ -123,7 +124,7 @@ const CURSOS_DEMO: Curso[] = [
 
 @Injectable({ providedIn: 'root' })
 export class CursoService {
-  private readonly apiUrl = 'http://localhost:3000/cursos';
+  private readonly apiUrl = `${environment.apiUrl}/cursos`;
 
   constructor(private http: HttpClient) {}
 

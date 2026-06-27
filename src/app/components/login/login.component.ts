@@ -22,8 +22,9 @@ export class LoginComponent {
   submit(): void {
     if (!this.email || !this.password) { this.error = 'Completa todos los campos.'; return; }
     this.loading = true; this.error = '';
-    const err = this.auth.login(this.email, this.password);
-    if (err) { this.error = err; this.loading = false; return; }
-    setTimeout(() => this.router.navigate(['/dashboard']), 800);
+    this.auth.login(this.email, this.password).subscribe((err) => {
+      if (err) { this.error = err; this.loading = false; return; }
+      setTimeout(() => this.router.navigate(['/dashboard']), 800);
+    });
   }
 }
