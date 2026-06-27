@@ -18,6 +18,86 @@
 <!-- CATÁLOGO -->
 <section class="cursos-page">
   <div class="container">
+    <div class="admin-cursos-panel">
+      <div class="admin-cursos-head">
+        <div>
+          <span class="admin-eyebrow">CRUD conectado a la API real</span>
+          <h2>{{ cursoEditando ? 'Editar curso' : 'Crear nuevo curso' }}</h2>
+        </div>
+        <button class="btn btn-outline" type="button" *ngIf="cursoEditando" (click)="cancelarEdicion()">
+          Cancelar edición
+        </button>
+      </div>
+
+      <form class="curso-form" (ngSubmit)="guardarCurso()">
+        <div class="form-group">
+          <label>Nombre</label>
+          <input type="text" [(ngModel)]="formCurso.nombre" name="nombreCurso" placeholder="Ej: Angular avanzado" />
+        </div>
+        <div class="form-group">
+          <label>Instructor</label>
+          <input type="text" [(ngModel)]="formCurso.instructor" name="instructorCurso" placeholder="Ej: por Ana Torres" />
+        </div>
+        <div class="form-group">
+          <label>Categoría</label>
+          <select [(ngModel)]="formCurso.categoria" name="categoriaCurso" (change)="actualizarCategoria()">
+            <option value="tecnologia">Tecnología</option>
+            <option value="diseno">Diseño</option>
+            <option value="negocios">Negocios</option>
+            <option value="datos">Datos</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Etiqueta</label>
+          <input type="text" [(ngModel)]="formCurso.tag" name="tagCurso" placeholder="Tecnología" />
+        </div>
+        <div class="form-group">
+          <label>Emoji</label>
+          <input type="text" [(ngModel)]="formCurso.emoji" name="emojiCurso" placeholder="💻" />
+        </div>
+        <div class="form-group">
+          <label>Color fondo</label>
+          <input type="color" [(ngModel)]="formCurso.bg" name="bgCurso" />
+        </div>
+        <div class="form-group">
+          <label>Horas</label>
+          <input type="text" [(ngModel)]="formCurso.horas" name="horasCurso" placeholder="20 horas" />
+        </div>
+        <div class="form-group">
+          <label>Precio</label>
+          <input type="text" [(ngModel)]="formCurso.precio" name="precioCurso" placeholder="$99.000" />
+        </div>
+        <div class="form-group">
+          <label>Rating</label>
+          <input type="text" [(ngModel)]="formCurso.rating" name="ratingCurso" placeholder="4.8" />
+        </div>
+        <div class="form-group">
+          <label>Reseñas</label>
+          <input type="text" [(ngModel)]="formCurso.reviews" name="reviewsCurso" placeholder="120" />
+        </div>
+        <div class="form-group form-wide">
+          <label>Objetivo</label>
+          <textarea [(ngModel)]="formCurso.objetivo" name="objetivoCurso" rows="3"
+            placeholder="Describe el objetivo del curso"></textarea>
+        </div>
+        <div class="form-group form-wide">
+          <label>Temas separados por coma</label>
+          <textarea [(ngModel)]="temasInput" name="temasCurso" rows="2"
+            placeholder="Tema 1, Tema 2, Tema 3"></textarea>
+        </div>
+        <div class="crud-feedback form-wide">
+          <span class="crud-ok" *ngIf="mensajeCrud">{{ mensajeCrud }}</span>
+          <span class="crud-error" *ngIf="errorCrud">{{ errorCrud }}</span>
+        </div>
+        <div class="form-actions form-wide">
+          <button class="btn btn-primary" type="submit" [disabled]="guardando">
+            {{ guardando ? 'Guardando...' : (cursoEditando ? 'Guardar cambios' : 'Crear curso') }}
+          </button>
+          <button class="btn btn-ghost" type="button" (click)="cancelarEdicion()">Limpiar</button>
+        </div>
+      </form>
+    </div>
+
     <div class="filters" style="margin-bottom:2rem">
       <button *ngFor="let f of filtros"
         class="filter-btn"
@@ -43,6 +123,10 @@
           <div class="curso-meta">
             <span class="curso-horas">🕐 {{ curso.horas }}</span>
             <span class="curso-precio">{{ curso.precio }}</span>
+          </div>
+          <div class="curso-admin-actions">
+            <button type="button" class="mini-btn edit" (click)="editarCurso(curso, $event)">Editar</button>
+            <button type="button" class="mini-btn delete" (click)="eliminarCurso(curso, $event)">Eliminar</button>
           </div>
           <div class="curso-hint">👆 Clic para ver detalles</div>
         </div>

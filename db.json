@@ -1,50 +1,6 @@
 {
   "cursos": [
     {
-      "id": 1,
-      "categoria": "tecnologia",
-      "emoji": "💻",
-      "bg": "#E6F1FB",
-      "tag": "Tecnología",
-      "tagClass": "tag-tech",
-      "nombre": "React & Node.js desde cero",
-      "instructor": "por Ana Torres",
-      "rating": "4.9",
-      "reviews": "2.1k",
-      "horas": "32 horas",
-      "precio": "$129.000",
-      "objetivo": "Dominar el desarrollo web fullstack moderno con React en el frontend y Node.js + Express en el backend.",
-      "temas": [
-        "Fundamentos de React y JSX",
-        "Estado y props, Hooks",
-        "API REST con Node.js",
-        "Base de datos con MongoDB",
-        "Despliegue en Vercel"
-      ]
-    },
-    {
-      "id": 2,
-      "categoria": "diseno",
-      "emoji": "🎨",
-      "bg": "#FAECE7",
-      "tag": "Diseño",
-      "tagClass": "tag-design",
-      "nombre": "Figma para UX Designers",
-      "instructor": "por Marcos Ríos",
-      "rating": "4.8",
-      "reviews": "1.7k",
-      "horas": "24 horas",
-      "precio": "$99.000",
-      "objetivo": "Diseñar interfaces digitales profesionales, crear prototipos y manejar sistemas de diseño en Figma.",
-      "temas": [
-        "Herramientas y navegación",
-        "Componentes y variantes",
-        "Auto Layout y grids",
-        "Prototipado interactivo",
-        "Handoff a desarrollo"
-      ]
-    },
-    {
       "id": 3,
       "categoria": "negocios",
       "emoji": "📊",
